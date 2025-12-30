@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Free Age Calculator Online | Calculate Exact Age in Years, Months & Days</title>
+
+    <meta name="description"
+        content="Free age calculator online to calculate your exact age in years, months, and days. Find days left until your next birthday instantly. Fast, accurate, and privacy-friendly.">
+        
+
+
+    <!-- Vercel Analytics (safe for static sites) -->
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+            --text: #0f172a;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+        }
+
+        body.dark {
+            --bg: #020617;
+            --card: #020617;
+            --primary: #60a5fa;
+            --primary-soft: rgba(96, 165, 250, 0.15);
+            --text: #e5e7eb;
+            --muted: #94a3b8;
+            --border: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 24px 16px 90px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .header h1 {
+            font-size: 2.3rem;
+            margin-bottom: 6px;
+        }
+
+        .header p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .theme-toggle {
+            margin-top: 14px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            border: none;
+            background: var(--primary-soft);
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        /* Ads */
+        .ad-slot {
+            margin: 26px 0;
+            padding: 14px;
+            border: 1px dashed var(--border);
+            border-radius: 14px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--muted);
+            background: var(--card);
+        }
+
+        /* Card */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 26px 22px;
+        }
+
+        /* Input */
+        .input-group {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            padding: 12px 14px;
+            font-size: 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            outline: none;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-soft);
+        }
+
+        .calc-btn {
+            margin-top: 14px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            border-radius: 14px;
+            border: none;
+            background: var(--primary);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Results */
+        .results {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+
+        .results.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-box {
+            background: var(--primary-soft);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .result-box strong {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .result-box span {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .next-bday {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Info sections */
+        section.info {
+            margin-top: 36px;
+        }
+
+        section.info h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        section.info p {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* Sticky Ad */
+        .sticky-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card);
+            border-top: 1px solid var(--border);
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* ===== Reusable FAQ Block ===== */
+
+        .faq-block {
+            margin-top: 50px;
+            padding: 32px 22px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 16px 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .faq-icon {
+            font-size: 1.4rem;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .faq-answer p {
+            padding: 0 6px 14px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Active State */
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+            /* + becomes × */
+        }
+
+        /* ===== Info Accordion (Reusable) ===== */
+
+        .info-accordion {
+            margin-top: 50px;
+            padding: 34px 22px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .info-title {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 22px;
+            color: var(--text);
+        }
+
+        .info-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-question {
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 16px 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .info-icon {
+            font-size: 1.4rem;
+            transition: transform 0.3s ease;
+        }
+
+        .info-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+        }
+
+        .info-answer p {
+            padding: 0 6px 14px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        /* Active state */
+        .info-item.active .info-answer {
+            max-height: 240px;
+        }
+
+        .info-item.active .info-icon {
+            transform: rotate(45deg);
+        }
+
+        /* ===== Premium Gradient Footer ===== */
+
+        .site-footer {
+            margin-top: 80px;
+            background: linear-gradient(135deg,
+                    #4f46e5,
+                    #6366f1,
+                    #3b82f6);
+            color: #eef2ff;
+        }
+
+        .site-footer a {
+            color: #e0e7ff;
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: auto;
+            padding: 48px 20px 36px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        /* Brand */
+        .footer-brand h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            color: #c7d2fe;
+            line-height: 1.6;
+        }
+
+        /* Columns */
+        .footer-col h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-col a,
+        .footer-col p {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #e0e7ff;
+        }
+
+        /* Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            text-align: center;
+            padding: 14px 10px;
+            font-size: 0.85rem;
+            color: #c7d2fe;
+        }
+
+        /* Dark mode compatibility */
+        body.dark .site-footer {
+            background: linear-gradient(135deg,
+                    #020617,
+                    #0f172a,
+                    #020617);
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .footer-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
+<defs>
+<linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+<stop offset='0%' stop-color='%234f46e5'/>
+<stop offset='100%' stop-color='%233b82f6'/>
+</linearGradient>
+</defs>
+<rect width='48' height='48' rx='12' fill='url(%23g)'/>
+<path d='M16 18h16v3H16zm0 6h16v3H16zm0 6h10v3H16z'
+fill='white'/>
+</svg>">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header class="header">
+            <h1>Age Calculator Online</h1>
+            <p>
+                Free Age Calculator Online helps you calculate your exact age in years,
+                months, and days based on your date of birth. This tool also shows how many
+                days are left until your next birthday. It is fast, accurate, and works
+                instantly in your browser.
+            </p>
+
+            <button id="themeToggle" class="theme-toggle">🌙 Dark Mode</button>
+        </header>
+
+        <!-- Top Banner Ad -->
+        <div class="ad-slot">Advertisement</div>
+
+        <div class="card">
+            <div class="input-group">
+                <label for="dob">Select your date of birth</label>
+                <input type="date" id="dob" />
+                <br />
+                <button class="calc-btn" id="calculateBtn">Calculate Age</button>
+            </div>
+
+            <div class="results" id="results">
+                <div class="result-box">
+                    <strong id="years">0</strong>
+                    <span>Years</span>
+                </div>
+                <div class="result-box">
+                    <strong id="months">0</strong>
+                    <span>Months</span>
+                </div>
+                <div class="result-box">
+                    <strong id="days">0</strong>
+                    <span>Days</span>
+                </div>
+            </div>
+
+            <div class="next-bday" id="nextBirthday"></div>
+        </div>
+
+        <!-- In-Content Ad -->
+        <div class="ad-slot">Advertisement</div>
+
+        <section class="info-accordion">
+
+            <h2 class="info-title">About This Age Calculator</h2>
+
+            <div class="info-item">
+                <button class="info-question">
+                    <span>How to use this age calculator</span>
+                    <span class="info-icon">+</span>
+                </button>
+                <div class="info-answer">
+                    <p>
+                        Using this age calculator is simple and quick. Select your date of birth
+                        using the date picker and click on the “Calculate Age” button.
+                        The tool instantly displays your exact age in years, months, and days,
+                        along with the number of days remaining until your next birthday.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <button class="info-question">
+                    <span>Is this age calculator free and safe?</span>
+                    <span class="info-icon">+</span>
+                </button>
+                <div class="info-answer">
+                    <p>
+                        Yes, this age calculator is completely free to use.
+                        It runs entirely in your browser, and your date of birth is never stored,
+                        shared, or sent to any server.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <button class="info-question">
+                    <span>Who can use this age calculator?</span>
+                    <span class="info-icon">+</span>
+                </button>
+                <div class="info-answer">
+                    <p>
+                        This age calculator is useful for students, job seekers, professionals,
+                        parents, and anyone who needs to calculate age accurately for forms,
+                        applications, records, or personal use.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="faq-block">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Is this tool free to use?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        Yes. This tool is completely free and can be used without registration.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Is my data stored anywhere?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        No. All calculations are performed locally in your browser.
+                        Your data is never stored or shared.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">
+                    <span>Can I use this tool on mobile?</span>
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>
+                        Yes. The tool is fully responsive and works on mobile, tablet,
+                        and desktop devices.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Sticky Footer Ad -->
+    <div class="sticky-ad">Advertisement</div>
+
+    <script>
+        const dobInput = document.getElementById("dob");
+        const yearsEl = document.getElementById("years");
+        const monthsEl = document.getElementById("months");
+        const daysEl = document.getElementById("days");
+        const nextBirthdayEl = document.getElementById("nextBirthday");
+        const resultsEl = document.getElementById("results");
+
+        document.getElementById("calculateBtn").addEventListener("click", () => {
+            if (!dobInput.value) return;
+
+            const dob = new Date(dobInput.value);
+            const today = new Date();
+
+            let years = today.getFullYear() - dob.getFullYear();
+            let months = today.getMonth() - dob.getMonth();
+            let days = today.getDate() - dob.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                days += prevMonth;
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            yearsEl.textContent = years;
+            monthsEl.textContent = months;
+            daysEl.textContent = days;
+
+            // Next birthday
+            let nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+            if (nextBday < today) {
+                nextBday.setFullYear(today.getFullYear() + 1);
+            }
+            const diffTime = nextBday - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            nextBirthdayEl.textContent = `🎉 ${diffDays} days left until your next birthday`;
+
+            resultsEl.classList.add("show");
+        });
+
+        // Dark mode
+        const toggle = document.getElementById("themeToggle");
+        if (localStorage.theme === "dark") {
+            document.body.classList.add("dark");
+            toggle.textContent = "☀️ Light Mode";
+        }
+
+        toggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
+            const isDark = document.body.classList.contains("dark");
+            localStorage.theme = isDark ? "dark" : "light";
+            toggle.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
+        });
+
+        document.querySelectorAll(".faq-question").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const item = btn.parentElement;
+
+                document.querySelectorAll(".faq-item").forEach(faq => {
+                    if (faq !== item) faq.classList.remove("active");
+                });
+
+                item.classList.toggle("active");
+            });
+        });
+
+        document.querySelectorAll(".info-question").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const item = btn.parentElement;
+
+                document.querySelectorAll(".info-item").forEach(i => {
+                    if (i !== item) i.classList.remove("active");
+                });
+
+                item.classList.toggle("active");
+            });
+        });
+
+
+    </script>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+
+            <!-- Brand -->
+            <div class="footer-brand">
+                <h3>Free Text Tools</h3>
+                <p>
+                    Privacy-first online tools to help you calculate, analyze,
+                    and work smarter with text.
+                </p>
+            </div>
+
+            <!-- Tools -->
+            <div class="footer-col">
+                <h4>Tools</h4>
+                <a href="/index.html">Word Counter</a>
+                <a href="/age-calculator.html">Age Calculator</a>
+                <a href="#">Character Counter</a>
+                <a href="#">Text Case Converter</a>
+            </div>
+
+            <!-- Company -->
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="/about-us.html">About Us</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms-and-conditions.html">Terms & Conditions</a>
+            </div>
+
+            <!-- Trust -->
+            <div class="footer-col">
+                <h4>Trust & Safety</h4>
+                <p>✔ No sign-up required</p>
+                <p>✔ Runs in your browser</p>
+                <p>✔ No data storage</p>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2025 <strong>GrowthSolutionsDesk</strong>. All rights reserved.
+        </div>
+    </footer>
+    ``
+
+
+</body>
+
+</html>
