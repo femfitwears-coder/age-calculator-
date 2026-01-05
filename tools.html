@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Free Online Text Tools | Word Counter & Age Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Free online tools including Word Counter, Age Calculator, and more text utilities. Simple, fast, and privacy-friendly.">
+
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #4f46e5;
+            --primary-soft: #eef2ff;
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        /* Hero */
+        .tools-hero {
+            background: linear-gradient(135deg, #4f46e5, #6366f1, #3b82f6);
+            padding: 70px 16px 80px;
+            color: #eef2ff;
+            text-align: center;
+        }
+
+        .tools-hero h1 {
+            font-size: 2.6rem;
+            margin-bottom: 10px;
+        }
+
+        .tools-hero p {
+            color: #c7d2fe;
+            font-size: 1rem;
+        }
+
+        /* Grid */
+        .tools-wrapper {
+            max-width: 1100px;
+            margin: -50px auto 80px;
+            padding: 0 16px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .tool-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 26px 22px;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .08);
+        }
+
+        .tool-card h3 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+        }
+
+        .tool-card p {
+            font-size: .95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* Buttons */
+        .tool-action {
+            margin-top: 14px;
+            display: inline-block;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: .9rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .soon {
+            background: var(--primary-soft);
+            color: var(--primary);
+            cursor: not-allowed;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            font-size: .7rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: var(--primary-soft);
+            color: var(--primary);
+            margin-left: 6px;
+        }
+
+        /* Info */
+        .tools-info {
+            max-width: 800px;
+            margin: 60px auto 0;
+            text-align: center;
+        }
+
+        .tools-info h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .tools-info p {
+            color: var(--muted);
+            font-size: .95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HERO -->
+    <section class="tools-hero">
+        <h1>Free Online Tools</h1>
+        <p>Simple, fast, and privacy-friendly utilities for everyday use</p>
+    </section>
+
+    <!-- TOOLS -->
+    <main class="tools-wrapper">
+        <div class="tools-grid">
+
+            <!-- Word Counter -->
+            <div class="tool-card">
+                <h3>Word Counter <span class="badge">Live</span></h3>
+                <p>
+                    Count words, characters, sentences, paragraphs,
+                    and estimate reading and speaking time instantly.
+                </p>
+                <a href="https://wordcounter-app-delta.vercel.app/" class="tool-action active">
+                    Open Tool
+                </a>
+
+            </div>
+
+            <!-- Age Calculator -->
+            <div class="tool-card">
+                <h3>Age Calculator <span class="badge">Live</span></h3>
+                <p>
+                    Calculate your exact age in years, months, and days,
+                    and see days remaining until your next birthday.
+                </p>
+                <a href="/age-calculator.html" class="tool-action active">Open Tool</a>
+            </div>
+
+            <!-- Coming Soon -->
+            <div class="tool-card">
+                <h3>Character Counter</h3>
+                <p>
+                    Count characters with and without spaces for
+                    social media and content limits.
+                </p>
+                <span class="tool-action soon">Coming Soon</span>
+            </div>
+
+            <div class="tool-card">
+                <h3>Text Case Converter</h3>
+                <p>
+                    Convert text to uppercase, lowercase, sentence case,
+                    or capitalize each word instantly.
+                </p>
+                <span class="tool-action soon">Coming Soon</span>
+            </div>
+
+        </div>
+
+        <!-- Info -->
+        <section class="tools-info">
+            <h2>Why use our tools?</h2>
+            <p>
+                All tools run directly in your browser without storing data.
+                No sign-up required. Completely free and easy to use.
+            </p>
+        </section>
+    </main>
+
+</body>
+
+</html>
